@@ -9,11 +9,16 @@
     "start": "react-native start",
     "test": "jest",
     "start:ios": "npm run ios -- --udid='20EB0407-8789-461F-B631-4FDF568296BA'"
-    
   },
   "dependencies": {
+    "@react-navigation/bottom-tabs": "^7.3.12",
+    "@react-navigation/native": "^7.1.8",
+    "@react-navigation/stack": "^7.3.1",
     "react": "19.0.0",
-    "react-native": "0.79.2"
+    "react-native": "0.79.2",
+    "react-native-gesture-handler": "^2.25.0",
+    "react-native-safe-area-context": "^5.4.0",
+    "react-native-screens": "^4.10.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

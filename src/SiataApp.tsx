@@ -1,12 +1,14 @@
+import '../gesture-handler';
+
 import React from 'react';
-import {View, Text} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {BottomTabNavigation} from './presentation/navigation/BottomTabNavigation';
 
 const SiataApp = () => {
-  console.log('hola');
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>hola mundo</Text>
-    </View>
+    <NavigationContainer>
+      <BottomTabNavigation />
+    </NavigationContainer>
   );
 };
 
