@@ -1,5 +1,7 @@
-import {StyleSheet, Text, View} from 'react-native';
+/* eslint-disable react-native/no-inline-styles */
+import {StyleSheet} from 'react-native';
 import React from 'react';
+import {Card, Text} from 'react-native-paper';
 
 interface Props {
   withCard: number;
@@ -9,11 +11,20 @@ interface Props {
 
 const CustomCards = ({withCard, heightCard, degrees = '21'}: Props) => {
   return (
-    <View style={[styles.container, {width: withCard, height: heightCard}]}>
-      <Text>{degrees}°</Text>
-      <Text>Icono</Text>
-      <Text>Tarde</Text>
-    </View>
+    <Card
+      style={[styles.container, {width: withCard, height: heightCard}]}
+      mode="elevated">
+      <Card.Content
+        style={{
+          alignItems: 'center',
+          height: '100%',
+          justifyContent: 'space-between',
+        }}>
+        <Text>{degrees}°</Text>
+        <Text>Icono</Text>
+        <Text>Tarde</Text>
+      </Card.Content>
+    </Card>
   );
 };
 
@@ -22,10 +33,8 @@ export default CustomCards;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#F4F8F9',
-
     borderRadius: 30,
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 10,
   },
 });
