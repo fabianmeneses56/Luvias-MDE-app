@@ -1,15 +1,26 @@
 /* eslint-disable react-native/no-inline-styles */
-import {StyleSheet} from 'react-native';
+import {Image, ImageSourcePropType, StyleSheet} from 'react-native';
 import React from 'react';
 import {Card, Text} from 'react-native-paper';
 
 interface Props {
   withCard: number;
   heightCard: number;
-  degrees?: string;
+  dayMoment?: string;
+  data?: 'BAJA' | 'MEDIA' | 'ALTA';
 }
 
-const CustomCards = ({withCard, heightCard, degrees = '21'}: Props) => {
+export const iconMap: Record<'BAJA' | 'MEDIA' | 'ALTA', ImageSourcePropType> = {
+  BAJA: require('../../assets/icons/daySun.png'),
+  MEDIA: require('../../assets/icons/dayRain.png'),
+  ALTA: require('../../assets/icons/dayStorm.png'),
+};
+const CustomCards = ({
+  withCard,
+  heightCard,
+  dayMoment = 'tarde',
+  data = 'BAJA',
+}: Props) => {
   return (
     <Card
       style={[styles.container, {width: withCard, height: heightCard}]}
@@ -20,9 +31,9 @@ const CustomCards = ({withCard, heightCard, degrees = '21'}: Props) => {
           height: '100%',
           justifyContent: 'space-between',
         }}>
-        <Text>{degrees}°</Text>
-        <Text>Icono</Text>
-        <Text>Tarde</Text>
+        <Text style={{textAlign: 'center'}}>{dayMoment}</Text>
+        <Image source={iconMap[data]} style={{width: 50, height: 50}} />
+        <Text>{data}</Text>
       </Card.Content>
     </Card>
   );

@@ -9,24 +9,38 @@ import {getCurrentDayUtil} from '../../config/utils/formats';
 
 interface Props {
   forecastScreenMode?: boolean;
-  data: Forecast | undefined;
+  data: Forecast;
 }
+
+const test = {
+  afternoonRain: 'Tarde',
+  earlyMorningRain: 'Madrugada',
+  morningRain: 'Mañana',
+  nightRain: 'Noche',
+};
+type TimeOfDayKey = keyof typeof test;
+const dayMomentOptions: TimeOfDayKey[] = [
+  'earlyMorningRain',
+  'morningRain',
+  'afternoonRain',
+  'nightRain',
+];
 
 const ForecastView = ({forecastScreenMode, data}: Props) => {
   const localDate = getCurrentDayUtil();
-  const getDataCurrentDay = data?.forecast.find(
+  const getDataCurrentDay = data.forecast.find(
     dataMap => dataMap.date === localDate,
   );
 
   return (
-    <View style={styles.container}>
+    <View>
       <View
         style={{
           alignSelf: 'center',
         }}>
         <Image
           source={require('../../assets/icons/dayStorm.png')}
-          style={{width: 300, height: 300}}
+          style={{width: 280, height: 280}}
         />
       </View>
 
@@ -59,10 +73,14 @@ const ForecastView = ({forecastScreenMode, data}: Props) => {
       <View>
         <Text variant="bodyLarge">Today</Text>
         <View style={styles.forecastContainer}>
-          <CustomCards withCard={90} heightCard={120} />
-          <CustomCards withCard={90} heightCard={120} />
-          <CustomCards withCard={90} heightCard={120} />
-          <CustomCards withCard={90} heightCard={120} />
+          {dayMomentOptions.map(res => (
+            <CustomCards
+              withCard={90}
+              heightCard={120}
+              dayMoment={test[res]}
+              data={getDataCurrentDay?.[res] as 'BAJA' | 'MEDIA' | 'ALTA'}
+            />
+          ))}
         </View>
       </View>
     </View>
@@ -72,17 +90,9 @@ const ForecastView = ({forecastScreenMode, data}: Props) => {
 export default ForecastView;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    padding: 10,
-    backgroundColor: 'white',
-  },
-
   forecastContainer: {
-    display: 'flex',
     flexDirection: 'row',
-    width: '100%',
+    flex: 1,
     justifyContent: 'space-between',
     marginTop: 10,
   },
