@@ -1,54 +1,54 @@
 export const arrayLocations = [
   {
     path: 'wrfcaldas.json',
-    name: 'caldas',
+    name: 'Caldas',
   },
   {
     path: 'wrfcopacabana.json',
-    name: 'copacabana',
+    name: 'Copacabana',
   },
   {
     path: 'wrfmedOccidente.json',
-    name: 'medellin occidente',
+    name: 'Medellin occidente',
   },
   {
     path: 'wrfsabaneta.json',
-    name: 'sabaneta',
+    name: 'Sabaneta',
   },
   {
     path: 'wrfpalmitas.json',
-    name: 'palmitas',
+    name: 'Palmitas',
   },
   {
     path: 'wrfgirardota.json',
-    name: 'girardota',
+    name: 'Girardota',
   },
   {
     path: 'wrfitagui.json',
-    name: 'itagui',
+    name: 'Itagui',
   },
   {
     path: 'wrfbarbosa.json',
-    name: 'barbosa',
+    name: 'Barbosa',
   },
   {
     path: 'wrfbello.json',
-    name: 'bello',
+    name: 'Bello',
   },
   {
     path: 'wrfenvigado.json',
-    name: 'envigado',
+    name: 'Envigado',
   },
   {
     path: 'wrfmedCentro.json',
-    name: 'medellin centro',
+    name: 'Medellin centro',
   },
   {
     path: 'wrflaestrella.json',
-    name: 'la estrella',
+    name: 'La estrella',
   },
   {
     path: 'wrfmedOriente.json',
-    name: 'medellin oriente',
+    name: 'Medellin oriente',
   },
 ];
