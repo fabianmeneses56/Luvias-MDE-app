@@ -33,17 +33,18 @@ const ForecastView = ({forecastScreenMode, data}: Props) => {
   );
 
   return (
-    <View>
-      <View
-        style={{
-          alignSelf: 'center',
-        }}>
-        <Image
-          source={require('../../assets/icons/dayStorm.png')}
-          style={{width: 280, height: 280}}
-        />
-      </View>
-
+    <View style={{flex: 1}}>
+      {!forecastScreenMode && (
+        <View
+          style={{
+            alignSelf: 'center',
+          }}>
+          <Image
+            source={require('../../assets/icons/dayStorm.png')}
+            style={{width: 280, height: 280}}
+          />
+        </View>
+      )}
       <View style={{marginVertical: 5}}>
         <View style={{alignItems: 'center', marginVertical: 10}}>
           {forecastScreenMode ? (
@@ -58,24 +59,14 @@ const ForecastView = ({forecastScreenMode, data}: Props) => {
           )}
           <Text variant="titleLarge">Descripcion clima</Text>
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            width: '100%',
-          }}>
-          <CustomCards withCard={120} heightCard={90} />
-          <CustomCards withCard={120} heightCard={90} />
-          <CustomCards withCard={120} heightCard={90} />
-        </View>
       </View>
 
       <View>
-        <Text variant="bodyLarge">Today</Text>
         <View style={styles.forecastContainer}>
-          {dayMomentOptions.map(res => (
+          {dayMomentOptions.map((res, index) => (
             <CustomCards
-              withCard={90}
+              key={index}
+              withCard={'100%'}
               heightCard={120}
               dayMoment={test[res]}
               data={getDataCurrentDay?.[res] as 'BAJA' | 'MEDIA' | 'ALTA'}
@@ -91,7 +82,7 @@ export default ForecastView;
 
 const styles = StyleSheet.create({
   forecastContainer: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     flex: 1,
     justifyContent: 'space-between',
     marginTop: 10,

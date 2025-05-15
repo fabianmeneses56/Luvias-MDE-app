@@ -1,19 +1,35 @@
-/* eslint-disable react-native/no-inline-styles */
-import {Image, ImageSourcePropType, StyleSheet} from 'react-native';
+import {
+  DimensionValue,
+  Image,
+  ImageSourcePropType,
+  StyleSheet,
+  View,
+} from 'react-native';
 import React from 'react';
 import {Card, Text} from 'react-native-paper';
 
 interface Props {
-  withCard: number;
-  heightCard: number;
+  withCard: number | DimensionValue;
+  heightCard: number | DimensionValue;
   dayMoment?: string;
   data?: 'BAJA' | 'MEDIA' | 'ALTA';
 }
 
-export const iconMap: Record<'BAJA' | 'MEDIA' | 'ALTA', ImageSourcePropType> = {
+export const iconMapDay: Record<
+  'BAJA' | 'MEDIA' | 'ALTA',
+  ImageSourcePropType
+> = {
   BAJA: require('../../assets/icons/daySun.png'),
   MEDIA: require('../../assets/icons/dayRain.png'),
   ALTA: require('../../assets/icons/dayStorm.png'),
+};
+export const iconMapNight: Record<
+  'BAJA' | 'MEDIA' | 'ALTA',
+  ImageSourcePropType
+> = {
+  BAJA: require('../../assets/icons/nightMoon.png'),
+  MEDIA: require('../../assets/icons/nightRain.png'),
+  ALTA: require('../../assets/icons/nightStorm.png'),
 };
 const CustomCards = ({
   withCard,
@@ -27,13 +43,25 @@ const CustomCards = ({
       mode="elevated">
       <Card.Content
         style={{
-          alignItems: 'center',
+          flexDirection: 'row',
           height: '100%',
-          justifyContent: 'space-between',
+          gap: 10,
         }}>
-        <Text style={{textAlign: 'center'}}>{dayMoment}</Text>
-        <Image source={iconMap[data]} style={{width: 50, height: 50}} />
-        <Text>{data}</Text>
+        <Image
+          source={dayMoment !== 'Noche' ? iconMapDay[data] : iconMapNight[data]}
+          style={{
+            width: 100,
+            height: 100,
+            resizeMode: 'contain',
+          }}
+        />
+
+        <View style={{flex: 1}}>
+          <Text variant="titleLarge">{dayMoment}</Text>
+          <Text variant="titleMedium">
+            Probabilidad {data.toLocaleLowerCase()} de lluvia
+          </Text>
+        </View>
       </Card.Content>
     </Card>
   );
@@ -45,7 +73,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#F4F8F9',
     borderRadius: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
+    marginVertical: 3,
   },
 });

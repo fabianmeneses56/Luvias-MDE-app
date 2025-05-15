@@ -19,7 +19,6 @@ export const ForecastScreen = () => {
   });
   const lastUpdate = data?.date.split(' ').reverse().join(' ');
 
-  console.log(data);
   return (
     <View style={[styles.container, {paddingTop: top}]}>
       <View
@@ -88,7 +87,7 @@ export const ForecastScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     padding: 10,
     backgroundColor: 'white',
   },
