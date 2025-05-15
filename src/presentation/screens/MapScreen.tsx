@@ -21,8 +21,8 @@ const MapScreen = () => {
             uri: 'https://siata.gov.co/data/siata_app/ultima_imagen_radarDBZH.png',
           }}
           bounds={[
-            [5.1, -76.6],
             [7.3, -74.3],
+            [5.1, -76.6],
           ]}
         />
       </MapView>
