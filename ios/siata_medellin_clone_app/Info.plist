@@ -51,5 +51,16 @@
 	<array>
 		<string>MaterialDesignIcons.ttf</string>
 	</array>
+
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+  <string>Permítenos acceder a tu ubicación para personalizar tu experiencia.</string>
+  <key>NSLocationTemporaryUsageDescriptionDictionary</key>
+  <dict>
+    <key>YOUR-PURPOSE-KEY</key>
+    <string>Permítenos acceder a tu ubicación para personalizar tu experiencia.</string>
+  </dict>
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>Permítenos acceder a tu ubicación para personalizar tu experiencia.</string>
+
 </dict>
 </plist>
