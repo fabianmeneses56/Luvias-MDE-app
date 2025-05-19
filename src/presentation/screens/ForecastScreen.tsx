@@ -3,11 +3,12 @@ import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {useQuery} from '@tanstack/react-query';
 import {Button, Text} from 'react-native-paper';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import ForecastView from '../components/ForecastView';
 import {getForecastByLocation} from '../../actions/api/getForecast';
 import {arrayLocations} from '../../config/utils/constanst';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import LoadingScreen from './loading/LoadingScreen';
 
 export const ForecastScreen = () => {
   const {top} = useSafeAreaInsets();
@@ -20,13 +21,14 @@ export const ForecastScreen = () => {
   const lastUpdate = data?.date.split(' ').reverse().join(' ');
 
   return (
-    <View style={[styles.container, {paddingTop: top}]}>
+    <View style={[styles.container, {paddingTop: top + 20}]}>
       <View
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
         }}>
         <Button
+          style={{height: 40}}
           mode="outlined"
           onPress={() =>
             setCurrentLocation(prev => {
@@ -61,6 +63,7 @@ export const ForecastScreen = () => {
           </Text>
         </View>
         <Button
+          style={{height: 40}}
           icon={'chevron-right-circle'}
           contentStyle={{flexDirection: 'row-reverse'}}
           mode="outlined"
@@ -78,7 +81,7 @@ export const ForecastScreen = () => {
         </Button>
       </View>
 
-      {isLoading && <Text>isLoading...</Text>}
+      {isLoading && <LoadingScreen />}
       {data && <ForecastView forecastScreenMode data={data} />}
     </View>
   );
