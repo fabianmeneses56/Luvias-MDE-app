@@ -11,6 +11,7 @@
     "start:ios": "npm run ios -- --udid='20EB0407-8789-461F-B631-4FDF568296BA'"
   },
   "dependencies": {
+    "@react-native-community/geolocation": "^3.4.0",
     "@react-native-vector-icons/material-design-icons": "^12.0.0",
     "@react-navigation/bottom-tabs": "^7.3.12",
     "@react-navigation/native": "^7.1.8",

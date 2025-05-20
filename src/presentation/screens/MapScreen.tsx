@@ -1,15 +1,30 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useEffect} from 'react';
 import {View, StyleSheet} from 'react-native';
 import MapView, {PROVIDER_GOOGLE, Overlay} from 'react-native-maps';
-// import {Text} from 'react-native-paper';
+import {useLocationStore} from '../../store/location/useLocationStore';
+import LoadingScreen from './loading/LoadingScreen';
 
 const MapScreen = () => {
   // const mapRef = useRef<MapView>();
+
+  const {lastKnownLocation, getLocation} = useLocationStore();
+
+  useEffect(() => {
+    if (lastKnownLocation === null) {
+      getLocation();
+    }
+  }, []);
+
+  if (lastKnownLocation === null) {
+    return <LoadingScreen />;
+  }
   return (
     <View style={styles.container}>
       <MapView
         provider={PROVIDER_GOOGLE} // remove if not using Google Maps
         style={styles.map}
+        showsUserLocation
         region={{
           latitude: 6.244203,
           longitude: -75.581212,
