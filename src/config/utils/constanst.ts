@@ -52,3 +52,5 @@ export const arrayLocations = [
     name: 'Medellin oriente',
   },
 ];
+
+export const appColor = '#228997';

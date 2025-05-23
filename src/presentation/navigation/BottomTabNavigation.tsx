@@ -5,6 +5,7 @@ import {ParamListBase, RouteProp} from '@react-navigation/native';
 
 import MapScreen from '../screens/MapScreen';
 import {ForecastScreen} from '../screens/ForecastScreen';
+import {appColor} from '../../config/utils/constanst';
 
 const Tab = createBottomTabNavigator();
 
@@ -34,9 +35,22 @@ export const BottomTabNavigation = () => {
       screenOptions={({route}) => ({
         headerShown: false,
         tabBarIcon: ({color, size}) => tabBarIconConfig(route, color, size),
+        tabBarActiveTintColor: appColor,
       })}>
-      <Tab.Screen name="Forecast" component={ForecastScreen} />
-      <Tab.Screen name="Map" component={MapScreen} />
+      <Tab.Screen
+        name="Forecast"
+        component={ForecastScreen}
+        options={{
+          tabBarLabel: 'Probabilidad',
+        }}
+      />
+      <Tab.Screen
+        name="Map"
+        component={MapScreen}
+        options={{
+          tabBarLabel: 'Mapa',
+        }}
+      />
     </Tab.Navigator>
   );
 };

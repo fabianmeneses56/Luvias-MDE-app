@@ -7,7 +7,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import ForecastView from '../components/ForecastView';
 import {getForecastByLocation} from '../../actions/api/getForecast';
-import {arrayLocations} from '../../config/utils/constanst';
+import {appColor, arrayLocations} from '../../config/utils/constanst';
 import LoadingScreen from './loading/LoadingScreen';
 
 export const ForecastScreen = () => {
@@ -28,7 +28,8 @@ export const ForecastScreen = () => {
           justifyContent: 'space-between',
         }}>
         <Button
-          style={{height: 40}}
+          style={{height: 40, borderColor: appColor}}
+          textColor={appColor}
           mode="outlined"
           onPress={() =>
             setCurrentLocation(prev => {
@@ -40,7 +41,7 @@ export const ForecastScreen = () => {
           }
           compact
           icon="chevron-left-circle">
-          Back
+          Atrás
         </Button>
         <View
           style={{
@@ -50,6 +51,7 @@ export const ForecastScreen = () => {
           <Text
             style={{
               textAlign: 'center',
+              fontWeight: '600',
             }}
             variant="headlineSmall">
             {arrayLocations[currentLocation].name}
@@ -63,10 +65,11 @@ export const ForecastScreen = () => {
           </Text>
         </View>
         <Button
-          style={{height: 40}}
+          style={{height: 40, borderColor: appColor}}
           icon={'chevron-right-circle'}
           contentStyle={{flexDirection: 'row-reverse'}}
           mode="outlined"
+          textColor={appColor}
           compact
           onPress={() =>
             setCurrentLocation(prev => {
@@ -77,7 +80,7 @@ export const ForecastScreen = () => {
               return 0;
             })
           }>
-          Next
+          Siguiente
         </Button>
       </View>
 
