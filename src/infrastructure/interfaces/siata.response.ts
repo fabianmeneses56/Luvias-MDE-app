@@ -12,3 +12,11 @@ export interface ForecastSiataDetails {
   lluvia_tarde: string;
   lluvia_noche: string;
 }
+
+export interface RadarSiata {
+  north: number;
+  south: number;
+  east: number;
+  west: number;
+  url: string;
+}

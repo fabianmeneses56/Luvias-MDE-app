@@ -2,24 +2,41 @@
 import React, {useEffect, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import MapView, {PROVIDER_GOOGLE, Overlay} from 'react-native-maps';
+import {useQuery} from '@tanstack/react-query';
+
 import {useLocationStore} from '../../store/location/useLocationStore';
 import LoadingScreen from './loading/LoadingScreen';
+import {getRadar} from '../../actions/api/getRadar';
 
 const MapScreen = () => {
-  // const mapRef = useRef<MapView>();
-
   const {lastKnownLocation, getLocation} = useLocationStore();
   const [showUserLocation, setShowUserLocation] = useState(false);
+
+  const {isLoading, data} = useQuery({
+    queryKey: ['radar'],
+    queryFn: () => getRadar(),
+    initialData: {
+      north: 0,
+      south: 0,
+      east: 0,
+      west: 0,
+      url: 'https://siata.gov.co/data/siata_app/ultima_imagen_radarDBZH.png',
+    },
+    staleTime: 0,
+    refetchOnMount: 'always',
+    refetchOnWindowFocus: 'always',
+    gcTime: 0,
+  });
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   useEffect(() => {
     if (lastKnownLocation === null) {
       getLocation();
     }
   }, []);
-
-  useEffect(() => {
-    console.log(lastKnownLocation);
-  }, [lastKnownLocation]);
 
   if (lastKnownLocation === null) {
     return <LoadingScreen />;
@@ -28,6 +45,9 @@ const MapScreen = () => {
   const onMapReady = () => {
     setShowUserLocation(true);
   };
+  if (isLoading) {
+    <LoadingScreen />;
+  }
 
   return (
     <View style={styles.container}>
@@ -44,11 +64,11 @@ const MapScreen = () => {
         }}>
         <Overlay
           image={{
-            uri: 'https://siata.gov.co/data/siata_app/ultima_imagen_radarDBZH.png',
+            uri: data.url,
           }}
           bounds={[
-            [7.3, -74.3],
-            [5.1, -76.6],
+            [data.north, data.east],
+            [data.south, data.west],
           ]}
         />
       </MapView>
