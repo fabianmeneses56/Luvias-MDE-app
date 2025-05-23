@@ -1,10 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import {Image, StyleSheet, View} from 'react-native';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import CustomCards from './CustomCards';
 import {Text} from 'react-native-paper';
 
-import {Forecast} from '../../domain/entities/forecast';
+import {Forecast, ForecastApi} from '../../domain/entities/forecast';
 import {getCurrentDayUtil} from '../../config/utils/formats';
 
 interface Props {
@@ -27,10 +27,29 @@ const dayMomentOptions: TimeOfDayKey[] = [
 ];
 
 const ForecastView = ({forecastScreenMode, data}: Props) => {
-  const localDate = getCurrentDayUtil();
-  const getDataCurrentDay = data.forecast.find(
-    dataMap => dataMap.date === localDate,
-  );
+  const [detaisData, setDetaisData] = useState<{
+    data: ForecastApi | null;
+    day: string;
+  }>({
+    data: null,
+    day: '',
+  });
+
+  useEffect(() => {
+    const today = getCurrentDayUtil();
+    const tomorrow = getCurrentDayUtil(true);
+
+    const todayData = data.forecast.find(f => f.date === today);
+    const tomorrowData = data.forecast.find(f => f.date === tomorrow);
+
+    if (todayData) {
+      setDetaisData({data: todayData, day: 'Hoy'});
+    } else if (tomorrowData) {
+      setDetaisData({data: tomorrowData, day: 'Mañana'});
+    } else {
+      setDetaisData({data: null, day: '—'});
+    }
+  }, [data]);
 
   return (
     <View style={{flex: 1}}>
@@ -49,15 +68,15 @@ const ForecastView = ({forecastScreenMode, data}: Props) => {
         <View style={{alignItems: 'center', marginVertical: 10}}>
           {forecastScreenMode ? (
             <Text variant="displayLarge">
-              {getDataCurrentDay?.maxTemperature}°
+              {detaisData?.data?.maxTemperature}°
               <Text variant="displaySmall">
-                / {getDataCurrentDay?.minTemperature}°
+                / {detaisData?.data?.minTemperature}°
               </Text>
             </Text>
           ) : (
             <Text variant="displayLarge">23°</Text>
           )}
-          <Text variant="titleLarge">Descripcion clima</Text>
+          <Text variant="titleLarge">{detaisData.day}</Text>
         </View>
       </View>
 
@@ -69,7 +88,7 @@ const ForecastView = ({forecastScreenMode, data}: Props) => {
               withCard={'100%'}
               heightCard={120}
               dayMoment={test[res]}
-              data={getDataCurrentDay?.[res] as 'BAJA' | 'MEDIA' | 'ALTA'}
+              data={detaisData?.data?.[res] as 'BAJA' | 'MEDIA' | 'ALTA'}
             />
           ))}
         </View>

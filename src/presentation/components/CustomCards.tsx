@@ -56,8 +56,10 @@ const CustomCards = ({
           }}
         />
 
-        <View style={{flex: 1}}>
-          <Text variant="titleLarge">{dayMoment}</Text>
+        <View style={{flex: 1, justifyContent: 'center'}}>
+          <Text variant="titleLarge" style={{fontWeight: 500}}>
+            {dayMoment}
+          </Text>
           <Text variant="titleMedium">
             Probabilidad {data.toLocaleLowerCase()} de lluvia
           </Text>

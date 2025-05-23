@@ -3,7 +3,6 @@ import Icon from '@react-native-vector-icons/material-design-icons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {ParamListBase, RouteProp} from '@react-navigation/native';
 
-import HomeScreen from '../screens/HomeScreen';
 import MapScreen from '../screens/MapScreen';
 import {ForecastScreen} from '../screens/ForecastScreen';
 
@@ -18,9 +17,7 @@ const tabBarIconConfig = (
 ) => {
   let iconName: IconName;
 
-  if (route.name === 'Home') {
-    iconName = 'home-outline';
-  } else if (route.name === 'Map') {
+  if (route.name === 'Map') {
     iconName = 'map';
   } else if (route.name === 'Forecast') {
     iconName = 'weather-lightning-rainy';
@@ -38,9 +35,8 @@ export const BottomTabNavigation = () => {
         headerShown: false,
         tabBarIcon: ({color, size}) => tabBarIconConfig(route, color, size),
       })}>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Map" component={MapScreen} />
       <Tab.Screen name="Forecast" component={ForecastScreen} />
+      <Tab.Screen name="Map" component={MapScreen} />
     </Tab.Navigator>
   );
 };
