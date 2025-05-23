@@ -12,14 +12,14 @@ interface Props {
   data: Forecast;
 }
 
-const test = {
+const dayMoment = {
   afternoonRain: 'Tarde',
   earlyMorningRain: 'Madrugada',
   morningRain: 'Mañana',
   nightRain: 'Noche',
 };
-type TimeOfDayKey = keyof typeof test;
-const dayMomentOptions: TimeOfDayKey[] = [
+type TimeOfDayKey = keyof typeof dayMoment;
+const dayMomentOptionsArray: TimeOfDayKey[] = [
   'earlyMorningRain',
   'morningRain',
   'afternoonRain',
@@ -80,18 +80,14 @@ const ForecastView = ({forecastScreenMode, data}: Props) => {
         </View>
       </View>
 
-      <View>
-        <View style={styles.forecastContainer}>
-          {dayMomentOptions.map((res, index) => (
-            <CustomCards
-              key={index}
-              withCard={'100%'}
-              heightCard={120}
-              dayMoment={test[res]}
-              data={detaisData?.data?.[res] as 'BAJA' | 'MEDIA' | 'ALTA'}
-            />
-          ))}
-        </View>
+      <View style={styles.forecastContainer}>
+        {dayMomentOptionsArray.map((res, index) => (
+          <CustomCards
+            key={index}
+            dayMoment={dayMoment[res]}
+            data={detaisData?.data?.[res] as 'BAJA' | 'MEDIA' | 'ALTA'}
+          />
+        ))}
       </View>
     </View>
   );
@@ -103,7 +99,7 @@ const styles = StyleSheet.create({
   forecastContainer: {
     flexDirection: 'column',
     flex: 1,
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
     marginTop: 10,
   },
 });
