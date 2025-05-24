@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {useQuery} from '@tanstack/react-query';
 import {Button, Text} from 'react-native-paper';
@@ -9,9 +9,13 @@ import ForecastView from '../components/ForecastView';
 import {getForecastByLocation} from '../../actions/api/getForecast';
 import {appColor, arrayLocations} from '../../config/utils/constanst';
 import LoadingScreen from './loading/LoadingScreen';
+import {storage} from '../../config/storage/mmkvStorage';
 
 export const ForecastScreen = () => {
   const {top} = useSafeAreaInsets();
+
+  const onBoardingViewed = storage.getString('location');
+
   const [currentLocation, setCurrentLocation] = useState(0);
   const {isLoading, data} = useQuery({
     queryKey: ['forecast', arrayLocations[currentLocation].path],
@@ -19,6 +23,13 @@ export const ForecastScreen = () => {
     placeholderData: previousData => previousData,
   });
   const lastUpdate = data?.date.split(' ').reverse().join(' ');
+
+  useEffect(() => {
+    const indexFavoriteLocation = arrayLocations.findIndex(
+      value => value.name === onBoardingViewed,
+    );
+    setCurrentLocation(indexFavoriteLocation ?? 0);
+  }, [onBoardingViewed]);
 
   return (
     <View style={[styles.container, {paddingTop: top + 20}]}>
