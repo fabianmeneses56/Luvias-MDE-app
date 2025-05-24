@@ -1,25 +1,29 @@
-import '../gesture-handler';
+import 'react-native-gesture-handler';
 
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {BottomTabNavigation} from './presentation/navigation/BottomTabNavigation';
 import {PaperProvider} from 'react-native-paper';
-
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+
+import {BottomTabNavigation} from './presentation/navigation/BottomTabNavigation';
 import {PermissionsChecker} from './presentation/providers/PermissionsChecker';
+import {StackNavigator} from './presentation/navigation/StackNavigator';
+import {storage} from './config/storage/mmkvStorage';
 
 const queryClient = new QueryClient();
 
 const SiataApp = () => {
+  const onBoardingViewed = storage.getString('location');
+
   return (
     <QueryClientProvider client={queryClient}>
-      <PermissionsChecker>
-        <NavigationContainer>
+      <NavigationContainer>
+        <PermissionsChecker>
           <PaperProvider>
-            <BottomTabNavigation />
+            {onBoardingViewed ? <BottomTabNavigation /> : <StackNavigator />}
           </PaperProvider>
-        </NavigationContainer>
-      </PermissionsChecker>
+        </PermissionsChecker>
+      </NavigationContainer>
     </QueryClientProvider>
   );
 };
