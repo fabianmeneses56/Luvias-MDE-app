@@ -39,7 +39,7 @@ export const ForecastScreen = () => {
           justifyContent: 'space-between',
         }}>
         <Button
-          style={{height: 40, borderColor: appColor}}
+          style={{height: 40, borderColor: appColor, width: 110}}
           textColor={appColor}
           mode="outlined"
           onPress={() =>
@@ -58,6 +58,7 @@ export const ForecastScreen = () => {
           style={{
             alignSelf: 'center',
             flex: 1,
+            padding: 5,
           }}>
           <Text
             style={{
@@ -76,7 +77,7 @@ export const ForecastScreen = () => {
           </Text>
         </View>
         <Button
-          style={{height: 40, borderColor: appColor}}
+          style={{height: 40, borderColor: appColor, width: 110}}
           icon={'chevron-right-circle'}
           contentStyle={{flexDirection: 'row-reverse'}}
           mode="outlined"

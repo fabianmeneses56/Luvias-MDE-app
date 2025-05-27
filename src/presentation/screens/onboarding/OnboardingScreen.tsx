@@ -19,7 +19,10 @@ const OnboardingScreen = () => {
     <SafeAreaView style={{flex: 1, backgroundColor: appColor}}>
       <View style={styles.container}>
         <View style={{marginTop: 150}}>
-          <Image source={require('../../../assets/icons/logoSiata.png')} />
+          <Image
+            source={require('../../../assets/icons/lluviasMdeLogo.png')}
+            style={{width: 300, height: 300}}
+          />
 
           <Button
             mode="contained"
