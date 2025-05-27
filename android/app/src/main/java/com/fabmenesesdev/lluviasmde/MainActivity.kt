@@ -1,4 +1,4 @@
-package com.siata_medellin_clone_app
+package com.fabmenesesdev.lluviasmde
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

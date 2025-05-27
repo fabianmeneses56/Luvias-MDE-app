@@ -1,4 +1,4 @@
-package com.siata_medellin_clone_app
+package com.fabmenesesdev.lluviasmde
 
 import android.app.Application
 import com.facebook.react.PackageList
