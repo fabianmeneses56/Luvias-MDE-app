@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1030BC9BB13F8015942720A5 /* libPods-siata_medellin_clone_app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 758CE272959F2B03297DAE83 /* libPods-siata_medellin_clone_app.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		26A4211622F12DDBEA70FB4B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		83C923C657656CCF11D75BD7 /* libPods-siata_medellin_clone_app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EBDD2930FE568B63166BD747 /* libPods-siata_medellin_clone_app.a */; };
 		DA16F03C2DD5842D002A6B1A /* maps.m in Sources */ = {isa = PBXBuildFile; fileRef = DA16F03B2DD5842D002A6B1A /* maps.m */; };
 /* End PBXBuildFile section */
 
@@ -20,13 +20,13 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = siata_medellin_clone_app/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = siata_medellin_clone_app/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = siata_medellin_clone_app/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		3230A80E573C06969FCD2C27 /* Pods-siata_medellin_clone_app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-siata_medellin_clone_app.debug.xcconfig"; path = "Target Support Files/Pods-siata_medellin_clone_app/Pods-siata_medellin_clone_app.debug.xcconfig"; sourceTree = "<group>"; };
-		758CE272959F2B03297DAE83 /* libPods-siata_medellin_clone_app.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-siata_medellin_clone_app.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = siata_medellin_clone_app/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = siata_medellin_clone_app/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D6247ECA85DDC87E8A97AFAB /* Pods-siata_medellin_clone_app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-siata_medellin_clone_app.release.xcconfig"; path = "Target Support Files/Pods-siata_medellin_clone_app/Pods-siata_medellin_clone_app.release.xcconfig"; sourceTree = "<group>"; };
 		DA16F03B2DD5842D002A6B1A /* maps.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = maps.m; sourceTree = "<group>"; };
 		DA16F0402DD58BBC002A6B1A /* siata_medellin_clone_app-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "siata_medellin_clone_app-Bridging-Header.h"; sourceTree = "<group>"; };
-		E5593249D58FC2C49183DDB3 /* Pods-siata_medellin_clone_app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-siata_medellin_clone_app.release.xcconfig"; path = "Target Support Files/Pods-siata_medellin_clone_app/Pods-siata_medellin_clone_app.release.xcconfig"; sourceTree = "<group>"; };
+		E100AFF0D4C9C808985D3EAE /* Pods-siata_medellin_clone_app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-siata_medellin_clone_app.debug.xcconfig"; path = "Target Support Files/Pods-siata_medellin_clone_app/Pods-siata_medellin_clone_app.debug.xcconfig"; sourceTree = "<group>"; };
+		EBDD2930FE568B63166BD747 /* libPods-siata_medellin_clone_app.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-siata_medellin_clone_app.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -35,7 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1030BC9BB13F8015942720A5 /* libPods-siata_medellin_clone_app.a in Frameworks */,
+				83C923C657656CCF11D75BD7 /* libPods-siata_medellin_clone_app.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,7 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				758CE272959F2B03297DAE83 /* libPods-siata_medellin_clone_app.a */,
+				EBDD2930FE568B63166BD747 /* libPods-siata_medellin_clone_app.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -97,8 +97,8 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3230A80E573C06969FCD2C27 /* Pods-siata_medellin_clone_app.debug.xcconfig */,
-				E5593249D58FC2C49183DDB3 /* Pods-siata_medellin_clone_app.release.xcconfig */,
+				E100AFF0D4C9C808985D3EAE /* Pods-siata_medellin_clone_app.debug.xcconfig */,
+				D6247ECA85DDC87E8A97AFAB /* Pods-siata_medellin_clone_app.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -110,13 +110,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "siata_medellin_clone_app" */;
 			buildPhases = (
-				878FA4CE320F86E338C57EB1 /* [CP] Check Pods Manifest.lock */,
+				6C4DE7C5D6EAAB27A503D0D8 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				AA37511B584FF9B11BBE389B /* [CP] Embed Pods Frameworks */,
-				ECBBC6B7D3F91BBB402566A5 /* [CP] Copy Pods Resources */,
+				46DDFAD2C1554D575C1C39CE /* [CP] Embed Pods Frameworks */,
+				9E22245586B95EB9B21ABCE8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -188,7 +188,24 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		878FA4CE320F86E338C57EB1 /* [CP] Check Pods Manifest.lock */ = {
+		46DDFAD2C1554D575C1C39CE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-siata_medellin_clone_app/Pods-siata_medellin_clone_app-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-siata_medellin_clone_app/Pods-siata_medellin_clone_app-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-siata_medellin_clone_app/Pods-siata_medellin_clone_app-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6C4DE7C5D6EAAB27A503D0D8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -210,24 +227,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AA37511B584FF9B11BBE389B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-siata_medellin_clone_app/Pods-siata_medellin_clone_app-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-siata_medellin_clone_app/Pods-siata_medellin_clone_app-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-siata_medellin_clone_app/Pods-siata_medellin_clone_app-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		ECBBC6B7D3F91BBB402566A5 /* [CP] Copy Pods Resources */ = {
+		9E22245586B95EB9B21ABCE8 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -261,7 +261,7 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3230A80E573C06969FCD2C27 /* Pods-siata_medellin_clone_app.debug.xcconfig */;
+			baseConfigurationReference = E100AFF0D4C9C808985D3EAE /* Pods-siata_medellin_clone_app.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -291,7 +291,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E5593249D58FC2C49183DDB3 /* Pods-siata_medellin_clone_app.release.xcconfig */;
+			baseConfigurationReference = D6247ECA85DDC87E8A97AFAB /* Pods-siata_medellin_clone_app.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

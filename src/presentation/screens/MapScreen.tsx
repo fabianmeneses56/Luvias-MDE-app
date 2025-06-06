@@ -1,8 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, ActivityIndicator} from 'react-native';
 import MapView, {PROVIDER_GOOGLE, Overlay} from 'react-native-maps';
 import {useQuery} from '@tanstack/react-query';
+import {Button, Dialog, Text} from 'react-native-paper';
 
 import {useLocationStore} from '../../store/location/useLocationStore';
 import LoadingScreen from './loading/LoadingScreen';
@@ -12,7 +12,9 @@ const MapScreen = () => {
   const {lastKnownLocation, getLocation} = useLocationStore();
   const [showUserLocation, setShowUserLocation] = useState(false);
 
-  const {isLoading, data} = useQuery({
+  const [errorDialog, setErrorDialog] = useState(false);
+
+  const {isPending, data, isError, error, isFetching} = useQuery({
     queryKey: ['radar'],
     queryFn: () => getRadar(),
     initialData: {
@@ -20,23 +22,25 @@ const MapScreen = () => {
       south: 0,
       east: 0,
       west: 0,
-      url: 'https://siata.gov.co/data/siata_app/ultima_imagen_radarDBZH.png',
+      url: '',
     },
     staleTime: 0,
     refetchOnMount: 'always',
     refetchOnWindowFocus: 'always',
     gcTime: 0,
+    refetchInterval: 5000,
   });
 
   useEffect(() => {
-    console.log(data);
-  }, [data]);
+    setErrorDialog(isError);
+  }, [isError]);
 
   useEffect(() => {
     if (lastKnownLocation === null) {
       getLocation();
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lastKnownLocation]);
 
   if (lastKnownLocation === null) {
     return <LoadingScreen />;
@@ -45,15 +49,15 @@ const MapScreen = () => {
   const onMapReady = () => {
     setShowUserLocation(true);
   };
-  if (isLoading) {
-    <LoadingScreen />;
+  if (isPending) {
+    return <LoadingScreen />;
   }
 
   return (
     <View style={styles.container}>
       <MapView
         onMapReady={onMapReady}
-        provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+        provider={PROVIDER_GOOGLE}
         style={styles.map}
         showsUserLocation={showUserLocation}
         region={{
@@ -72,6 +76,24 @@ const MapScreen = () => {
           ]}
         />
       </MapView>
+      {isFetching && (
+        <View style={styles.fetchingContainer}>
+          <ActivityIndicator size={30} color="black" />
+        </View>
+      )}
+      {error && (
+        <Dialog visible={errorDialog} onDismiss={() => setErrorDialog(false)}>
+          <Dialog.Title>Uy, algo salió mal 😕</Dialog.Title>
+          <Dialog.Content>
+            <Text variant="bodyMedium">
+              No pudimos obtener la información del clima.
+            </Text>
+          </Dialog.Content>
+          <Dialog.Actions>
+            <Button onPress={() => setErrorDialog(false)}>Salir</Button>
+          </Dialog.Actions>
+        </Dialog>
+      )}
     </View>
   );
 };
@@ -82,10 +104,14 @@ const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
     flex: 1,
-    justifyContent: 'flex-end',
     alignItems: 'center',
   },
   map: {
     ...StyleSheet.absoluteFillObject,
+  },
+  fetchingContainer: {
+    position: 'absolute',
+    alignItems: 'center',
+    alignContent: 'center',
   },
 });
