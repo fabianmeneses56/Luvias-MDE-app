@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {FlatList, Image, StyleSheet, View} from 'react-native';
+import {Dimensions, FlatList, Image, StyleSheet, View} from 'react-native';
 import React, {useState} from 'react';
 import {Button, Text} from 'react-native-paper';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
@@ -14,21 +14,29 @@ const OnboardingScreen = () => {
   const [visible, setVisible] = useState(false);
 
   const navigation = useNavigation<NavigationProp<RootStackParams>>();
+  const {height: heightTest} = Dimensions.get('window');
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: appColor}}>
       <View style={styles.container}>
         <View
           style={{
-            marginTop: 150,
+            paddingTop: '10%',
           }}>
-          <Text variant="headlineLarge" style={{color: 'white'}}>
+          <Text
+            variant="headlineLarge"
+            style={{color: 'white', textAlign: 'center'}}>
             Bienvenido a Lluvias MDE
           </Text>
 
           <Image
             source={require('../../../assets/icons/lluviasMdeLogo.png')}
-            style={{width: 300, height: 300, alignSelf: 'center'}}
+            style={{
+              width: 300,
+              height: 270,
+              alignSelf: 'center',
+            }}
+            resizeMode="contain"
           />
 
           <Button
@@ -43,7 +51,14 @@ const OnboardingScreen = () => {
           </Button>
           <View>
             {visible && (
-              <View style={styles.dropdown}>
+              <View
+                style={[
+                  styles.dropdown,
+                  {
+                    height:
+                      heightTest > 700 ? heightTest * 0.5 : heightTest * 0.2,
+                  },
+                ]}>
                 <FlatList
                   data={arrayLocations}
                   keyExtractor={(item, index) => index.toString()}
@@ -95,6 +110,8 @@ const styles = StyleSheet.create({
     backgroundColor: appColor,
     justifyContent: 'space-between',
     alignItems: 'center',
+    alignContent: 'center',
+    paddingHorizontal: 10,
   },
   dropdown: {
     marginTop: 5,
@@ -108,7 +125,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     width: '100%',
-    height: 250,
   },
   option: {
     padding: 15,
