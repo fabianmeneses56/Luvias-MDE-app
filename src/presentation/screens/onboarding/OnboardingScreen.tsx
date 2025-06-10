@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import {FlatList, Image, StyleSheet, View} from 'react-native';
 import React, {useState} from 'react';
-import {Button} from 'react-native-paper';
+import {Button, Text} from 'react-native-paper';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
@@ -18,10 +18,17 @@ const OnboardingScreen = () => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: appColor}}>
       <View style={styles.container}>
-        <View style={{marginTop: 150}}>
+        <View
+          style={{
+            marginTop: 150,
+          }}>
+          <Text variant="headlineLarge" style={{color: 'white'}}>
+            Bienvenido a Lluvias MDE
+          </Text>
+
           <Image
             source={require('../../../assets/icons/lluviasMdeLogo.png')}
-            style={{width: 300, height: 300}}
+            style={{width: 300, height: 300, alignSelf: 'center'}}
           />
 
           <Button

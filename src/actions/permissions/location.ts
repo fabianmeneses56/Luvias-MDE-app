@@ -1,4 +1,4 @@
-import {Platform} from 'react-native';
+import {Alert, Platform} from 'react-native';
 import {
   PERMISSIONS,
   PermissionStatus as RNPermissionStatus,
@@ -22,7 +22,15 @@ export const requestLocationPermission =
     }
 
     if (status === 'blocked') {
-      await openSettings();
+      Alert.alert(
+        'Ubicación imprecisa o Permiso desabilitado',
+        'Activa “Precisión alta” en Ajustes → Ubicación para mejorar la exactitud.',
+        [
+          {text: 'Cancelar', style: 'cancel'},
+          {text: 'Abrir ajustes', onPress: () => openSettings()},
+        ],
+      );
+
       return await checkLocationPermission();
     }
 

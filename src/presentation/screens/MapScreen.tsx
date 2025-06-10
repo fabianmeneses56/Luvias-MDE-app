@@ -1,19 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, ActivityIndicator} from 'react-native';
-import MapView, {PROVIDER_GOOGLE, Overlay} from 'react-native-maps';
+import MapView, {PROVIDER_GOOGLE, Overlay, UrlTile} from 'react-native-maps';
 import {useQuery} from '@tanstack/react-query';
 import {Button, Dialog, Text} from 'react-native-paper';
 
 import {useLocationStore} from '../../store/location/useLocationStore';
 import LoadingScreen from './loading/LoadingScreen';
 import {getRadar} from '../../actions/api/getRadar';
+import {usePermissionStore} from '../../store/permissions/usePermissionStore';
 
 const MapScreen = () => {
   const {lastKnownLocation, getLocation} = useLocationStore();
   const [showUserLocation, setShowUserLocation] = useState(false);
 
   const [errorDialog, setErrorDialog] = useState(false);
-
+  const {locationStatus} = usePermissionStore();
   const {isPending, data, isError, error, isFetching} = useQuery({
     queryKey: ['radar'],
     queryFn: () => getRadar(),
@@ -22,7 +23,7 @@ const MapScreen = () => {
       south: 0,
       east: 0,
       west: 0,
-      url: '',
+      url: 'https://geoportal.siata.gov.co/fastgeoapi/geodata/radar/3/reflectividad?0',
     },
     staleTime: 0,
     refetchOnMount: 'always',
@@ -31,6 +32,7 @@ const MapScreen = () => {
     refetchInterval: 5000,
   });
 
+  console.log(data);
   useEffect(() => {
     setErrorDialog(isError);
   }, [isError]);
@@ -40,7 +42,7 @@ const MapScreen = () => {
       getLocation();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lastKnownLocation]);
+  }, [lastKnownLocation, locationStatus]);
 
   if (lastKnownLocation === null) {
     return <LoadingScreen />;
@@ -66,7 +68,7 @@ const MapScreen = () => {
           latitudeDelta: 0.2,
           longitudeDelta: 0.2,
         }}>
-        <Overlay
+        {/* <Overlay
           image={{
             uri: data.url,
           }}
@@ -74,6 +76,11 @@ const MapScreen = () => {
             [data.north, data.east],
             [data.south, data.west],
           ]}
+        /> */}
+        <UrlTile
+          urlTemplate={`https://geoportal.siata.gov.co/fastgeoapi/geodata/radar/3/reflectividad?0`}
+          maximumZ={30}
+          flipY={false}
         />
       </MapView>
       {isFetching && (

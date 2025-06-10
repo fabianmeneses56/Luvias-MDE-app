@@ -2,7 +2,7 @@
 import React, {useState, useEffect} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {useQuery} from '@tanstack/react-query';
-import {Button, Text} from 'react-native-paper';
+import {Text, IconButton} from 'react-native-paper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import ForecastView from '../components/ForecastView';
@@ -38,9 +38,9 @@ export const ForecastScreen = () => {
           flexDirection: 'row',
           justifyContent: 'space-between',
         }}>
-        <Button
-          style={{height: 40, borderColor: appColor, width: 110}}
-          textColor={appColor}
+        <IconButton
+          style={{borderColor: appColor}}
+          iconColor={appColor}
           mode="outlined"
           onPress={() =>
             setCurrentLocation(prev => {
@@ -50,10 +50,8 @@ export const ForecastScreen = () => {
               return arrayLocations.length - 1;
             })
           }
-          compact
-          icon="chevron-left-circle">
-          Atrás
-        </Button>
+          icon="chevron-left-circle"
+        />
         <View
           style={{
             alignSelf: 'center',
@@ -76,13 +74,11 @@ export const ForecastScreen = () => {
             {lastUpdate}
           </Text>
         </View>
-        <Button
-          style={{height: 40, borderColor: appColor, width: 110}}
+        <IconButton
+          style={{borderColor: appColor}}
           icon={'chevron-right-circle'}
-          contentStyle={{flexDirection: 'row-reverse'}}
           mode="outlined"
-          textColor={appColor}
-          compact
+          iconColor={appColor}
           onPress={() =>
             setCurrentLocation(prev => {
               if (prev !== arrayLocations.length - 1) {
@@ -91,9 +87,8 @@ export const ForecastScreen = () => {
 
               return 0;
             })
-          }>
-          Siguiente
-        </Button>
+          }
+        />
       </View>
 
       {isLoading && <LoadingScreen />}

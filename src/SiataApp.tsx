@@ -1,8 +1,11 @@
 import 'react-native-gesture-handler';
 
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {PaperProvider} from 'react-native-paper';
+import {
+  NavigationContainer,
+  DefaultTheme as NavLightTheme,
+} from '@react-navigation/native';
+import {PaperProvider, MD3LightTheme} from 'react-native-paper';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 
 import {BottomTabNavigation} from './presentation/navigation/BottomTabNavigation';
@@ -17,9 +20,9 @@ const SiataApp = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <NavigationContainer>
+      <NavigationContainer theme={NavLightTheme}>
         <PermissionsChecker>
-          <PaperProvider>
+          <PaperProvider theme={MD3LightTheme}>
             {onBoardingViewed ? <BottomTabNavigation /> : <StackNavigator />}
           </PaperProvider>
         </PermissionsChecker>
