@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, ActivityIndicator} from 'react-native';
-import MapView, {PROVIDER_GOOGLE, Overlay, UrlTile} from 'react-native-maps';
+import {View, StyleSheet, ActivityIndicator, Platform} from 'react-native';
+import MapView, {PROVIDER_GOOGLE, Overlay} from 'react-native-maps';
 import {useQuery} from '@tanstack/react-query';
 import {Button, Dialog, Text} from 'react-native-paper';
 
@@ -8,6 +8,7 @@ import {useLocationStore} from '../../store/location/useLocationStore';
 import LoadingScreen from './loading/LoadingScreen';
 import {getRadar} from '../../actions/api/getRadar';
 import {usePermissionStore} from '../../store/permissions/usePermissionStore';
+import {downloadReflectivity} from '../../actions/fileSystem/downloadReflectivity';
 
 const MapScreen = () => {
   const {lastKnownLocation, getLocation} = useLocationStore();
@@ -31,7 +32,7 @@ const MapScreen = () => {
     gcTime: 0,
     refetchInterval: 5000,
   });
-
+  const [localImage, setLocalImage] = useState<string | null>(null);
   console.log(data);
   useEffect(() => {
     setErrorDialog(isError);
@@ -44,10 +45,32 @@ const MapScreen = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lastKnownLocation, locationStatus]);
 
+  useEffect(() => {
+    let isActive = true;
+
+    downloadReflectivity(
+      'https://siata.gov.co/data/siata_app/ultima_imagen_radarDBZH.png',
+    )
+      .then(path => {
+        if (isActive) {
+          const uri = Platform.OS === 'android' ? `file://${path}` : path;
+
+          setLocalImage(uri);
+        }
+      })
+      .catch(console.error);
+
+    return () => {
+      isActive = false;
+    };
+  }, []);
+
   if (lastKnownLocation === null) {
     return <LoadingScreen />;
   }
-
+  if (!localImage) {
+    return <LoadingScreen />;
+  }
   const onMapReady = () => {
     setShowUserLocation(true);
   };
@@ -68,21 +91,18 @@ const MapScreen = () => {
           latitudeDelta: 0.2,
           longitudeDelta: 0.2,
         }}>
-        {/* <Overlay
+        <Overlay
+          key={localImage}
           image={{
-            uri: data.url,
+            uri: localImage,
           }}
           bounds={[
             [data.north, data.east],
             [data.south, data.west],
           ]}
-        /> */}
-        <UrlTile
-          urlTemplate={`https://geoportal.siata.gov.co/fastgeoapi/geodata/radar/3/reflectividad?0`}
-          maximumZ={30}
-          flipY={false}
         />
       </MapView>
+
       {isFetching && (
         <View style={styles.fetchingContainer}>
           <ActivityIndicator size={30} color="black" />
