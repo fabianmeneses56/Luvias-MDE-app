@@ -13,8 +13,6 @@
 - Define tu municipio favorito para verlo siempre de primeras
 - **Privacidad ante todo:** la app no recopila datos personales ni rastrea al usuario.
 
-> ⚠️ **Nota sobre la batería:** el uso continuo del GPS en segundo plano puede reducir drásticamente la duración de la batería.
-
 ---
 
 ## 🚀 Primeros pasos
