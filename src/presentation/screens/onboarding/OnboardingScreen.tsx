@@ -89,7 +89,9 @@ const OnboardingScreen = () => {
             mode="contained"
             onPress={() => {
               storage.setString('location', value);
-              navigation.navigate('bottomTabNavigation');
+              navigation.reset({
+                routes: [{name: 'bottomTabNavigation'}],
+              });
             }}
             labelStyle={{fontWeight: '600'}}
             buttonColor="#FFFFFF"
