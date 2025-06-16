@@ -17,6 +17,7 @@ import {getRadar} from '../../actions/api/getRadar';
 import {usePermissionStore} from '../../store/permissions/usePermissionStore';
 import {downloadReflectivity} from '../../actions/fileSystem/downloadReflectivity';
 import {appColor} from '../../config/utils/constanst';
+import {FocusAwareStatusBar} from '../components/FocusAwareStatusBar';
 
 const MapScreen = () => {
   const {lastKnownLocation, getLocation} = useLocationStore();
@@ -88,6 +89,7 @@ const MapScreen = () => {
 
   return (
     <View style={styles.container}>
+      <FocusAwareStatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
       <MapView
         onMapReady={onMapReady}
         provider={PROVIDER_GOOGLE}

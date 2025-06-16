@@ -10,6 +10,7 @@ import {getForecastByLocation} from '../../actions/api/getForecast';
 import {appColor, arrayLocations} from '../../config/utils/constanst';
 import LoadingScreen from './loading/LoadingScreen';
 import {storage} from '../../config/storage/mmkvStorage';
+import {FocusAwareStatusBar} from '../components/FocusAwareStatusBar';
 
 export const ForecastScreen = () => {
   const {top} = useSafeAreaInsets();
@@ -33,6 +34,7 @@ export const ForecastScreen = () => {
 
   return (
     <View style={[styles.container, {paddingTop: top + 20}]}>
+      <FocusAwareStatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
       <View
         style={{
           flexDirection: 'row',
