@@ -2,11 +2,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import OnboardingScreen from '../screens/onboarding/OnboardingScreen';
 import {BottomTabNavigation} from './BottomTabNavigation';
+import {RootStackParams} from '../../infrastructure/interfaces/navigation';
 
-export type RootStackParams = {
-  onboardingScreen: undefined;
-  bottomTabNavigation: undefined;
-};
 const Stack = createStackNavigator<RootStackParams>();
 
 export const StackNavigator = () => {

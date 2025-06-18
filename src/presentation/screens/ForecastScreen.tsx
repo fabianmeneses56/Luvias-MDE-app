@@ -94,7 +94,7 @@ export const ForecastScreen = () => {
       </View>
 
       {isLoading && <LoadingScreen />}
-      {data && <ForecastView forecastScreenMode data={data} />}
+      {data && <ForecastView data={data} />}
     </View>
   );
 };

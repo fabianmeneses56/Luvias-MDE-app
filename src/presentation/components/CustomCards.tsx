@@ -1,29 +1,14 @@
-import {Image, ImageSourcePropType, StyleSheet, View} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
 import React from 'react';
 import {Card, Text} from 'react-native-paper';
 
-interface Props {
-  dayMoment?: string;
-  data?: 'BAJA' | 'MEDIA' | 'ALTA';
-}
+import {PropsCustomCards} from '../../infrastructure/interfaces/components';
+import {iconMapDay, iconMapNight} from '../../config/utils/constanst';
 
-export const iconMapDay: Record<
-  'BAJA' | 'MEDIA' | 'ALTA',
-  ImageSourcePropType
-> = {
-  BAJA: require('../../assets/icons/daySun.png'),
-  MEDIA: require('../../assets/icons/dayRain.png'),
-  ALTA: require('../../assets/icons/dayStorm.png'),
-};
-export const iconMapNight: Record<
-  'BAJA' | 'MEDIA' | 'ALTA',
-  ImageSourcePropType
-> = {
-  BAJA: require('../../assets/icons/nightMoon.png'),
-  MEDIA: require('../../assets/icons/nightRain.png'),
-  ALTA: require('../../assets/icons/nightStorm.png'),
-};
-const CustomCards = ({dayMoment = 'tarde', data = 'BAJA'}: Props) => {
+const CustomCards = ({
+  dayMoment = 'tarde',
+  data = 'BAJA',
+}: PropsCustomCards) => {
   return (
     <Card style={[styles.container]} mode="elevated">
       <Card.Content style={styles.cardContainer}>

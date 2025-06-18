@@ -8,7 +8,7 @@ import BottomSheet, {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 
 import {appColor, arrayLocations} from '../../../config/utils/constanst';
 import {storage} from '../../../config/storage/mmkvStorage';
-import {RootStackParams} from '../../navigation/StackNavigator';
+import {RootStackParams} from '../../../infrastructure/interfaces/navigation';
 
 const OnboardingScreen = () => {
   const [value, setValue] = useState<null | string>(null);
@@ -109,18 +109,6 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     paddingHorizontal: 10,
   },
-  //   marginTop: 5,
-  //   backgroundColor: 'white',
-  //   borderRadius: 5,
-  //   elevation: 3,
-  //   shadowColor: '#000',
-  //   shadowOpacity: 0.1,
-  //   shadowRadius: 5,
-  //   shadowOffset: {width: 0, height: 2},
-  //   position: 'absolute',
-  //   top: 0,
-  //   width: '100%',
-  // },
   option: {
     paddingVertical: 5,
     borderBottomWidth: 1,

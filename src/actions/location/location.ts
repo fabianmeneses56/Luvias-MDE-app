@@ -11,7 +11,6 @@ export const getCurrentLocation = async (): Promise<Location> => {
         });
       },
       error => {
-        console.log("Can't get location");
         reject(error);
       },
       {

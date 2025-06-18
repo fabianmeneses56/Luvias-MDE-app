@@ -1,32 +1,19 @@
 /* eslint-disable react-native/no-inline-styles */
-import {Image, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React, {useState, useEffect} from 'react';
-import CustomCards from './CustomCards';
 import {Text} from 'react-native-paper';
 
-import {Forecast, ForecastApi} from '../../domain/entities/forecast';
+import CustomCards from './CustomCards';
+import {ForecastApi} from '../../domain/entities/forecast';
 import {getCurrentDayUtil} from '../../config/utils/formats';
+import {
+  ProbabilityWeather,
+  dayMomentOptionsArray,
+  PropsForecastView,
+} from '../../infrastructure/interfaces/components';
+import {dayMoment} from '../../config/utils/constanst';
 
-interface Props {
-  forecastScreenMode?: boolean;
-  data: Forecast;
-}
-
-const dayMoment = {
-  afternoonRain: 'Tarde',
-  earlyMorningRain: 'Madrugada',
-  morningRain: 'Mañana',
-  nightRain: 'Noche',
-};
-type TimeOfDayKey = keyof typeof dayMoment;
-const dayMomentOptionsArray: TimeOfDayKey[] = [
-  'earlyMorningRain',
-  'morningRain',
-  'afternoonRain',
-  'nightRain',
-];
-
-const ForecastView = ({forecastScreenMode, data}: Props) => {
+const ForecastView = ({data}: PropsForecastView) => {
   const [detaisData, setDetaisData] = useState<{
     data: ForecastApi | null;
     day: string;
@@ -53,29 +40,15 @@ const ForecastView = ({forecastScreenMode, data}: Props) => {
 
   return (
     <View style={{flex: 1}}>
-      {!forecastScreenMode && (
-        <View
-          style={{
-            alignSelf: 'center',
-          }}>
-          <Image
-            source={require('../../assets/icons/dayStorm.png')}
-            style={{width: 280, height: 280}}
-          />
-        </View>
-      )}
       <View style={{marginVertical: 5}}>
         <View style={{alignItems: 'center', marginVertical: 10}}>
-          {forecastScreenMode ? (
-            <Text variant="displayLarge">
-              {detaisData?.data?.maxTemperature}°
-              <Text variant="displaySmall">
-                / {detaisData?.data?.minTemperature}°
-              </Text>
+          <Text variant="displayLarge">
+            {detaisData?.data?.maxTemperature}°
+            <Text variant="displaySmall">
+              / {detaisData?.data?.minTemperature}°
             </Text>
-          ) : (
-            <Text variant="displayLarge">23°</Text>
-          )}
+          </Text>
+
           <Text variant="titleLarge">{detaisData.day}</Text>
         </View>
       </View>
@@ -85,7 +58,7 @@ const ForecastView = ({forecastScreenMode, data}: Props) => {
           <CustomCards
             key={index}
             dayMoment={dayMoment[res]}
-            data={detaisData?.data?.[res] as 'BAJA' | 'MEDIA' | 'ALTA'}
+            data={detaisData?.data?.[res] as ProbabilityWeather}
           />
         ))}
       </View>

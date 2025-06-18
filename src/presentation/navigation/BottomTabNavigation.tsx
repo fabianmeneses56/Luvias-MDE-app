@@ -1,4 +1,4 @@
-import React, {ComponentProps} from 'react';
+import React from 'react';
 import Icon from '@react-native-vector-icons/material-design-icons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {ParamListBase, RouteProp} from '@react-navigation/native';
@@ -6,10 +6,9 @@ import {ParamListBase, RouteProp} from '@react-navigation/native';
 import MapScreen from '../screens/MapScreen';
 import {ForecastScreen} from '../screens/ForecastScreen';
 import {appColor} from '../../config/utils/constanst';
+import {IconName} from '../../infrastructure/interfaces/navigation';
 
 const Tab = createBottomTabNavigator();
-
-type IconName = ComponentProps<typeof Icon>['name'];
 
 const tabBarIconConfig = (
   route: RouteProp<ParamListBase, string>,
