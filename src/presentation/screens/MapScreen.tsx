@@ -67,8 +67,7 @@ const MapScreen = () => {
       isActive = false;
     };
   }, []);
-  const shouldShowLoading =
-    lastKnownLocation === null || !localImage || isPending;
+  const shouldShowLoading = !localImage || isPending;
 
   if (shouldShowLoading) {
     return <LoadingScreen />;
