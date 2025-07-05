@@ -10,6 +10,9 @@ import {getRadar} from '../../actions/api/getRadar';
 import {usePermissionStore} from '../../store/permissions/usePermissionStore';
 import {downloadReflectivity} from '../../actions/fileSystem/downloadReflectivity';
 
+import {FocusAwareStatusBar} from '../components/FocusAwareStatusBar';
+import FloatButtonsMap from '../components/FloatButtonsMap';
+
 const MapScreen = () => {
   const {lastKnownLocation, getLocation} = useLocationStore();
   const [showUserLocation, setShowUserLocation] = useState(false);
@@ -33,7 +36,7 @@ const MapScreen = () => {
     refetchInterval: 5000,
   });
   const [localImage, setLocalImage] = useState<string | null>(null);
-  console.log(data);
+
   useEffect(() => {
     setErrorDialog(isError);
   }, [isError]);
@@ -64,22 +67,19 @@ const MapScreen = () => {
       isActive = false;
     };
   }, []);
+  const shouldShowLoading = !localImage || isPending;
 
-  if (lastKnownLocation === null) {
+  if (shouldShowLoading) {
     return <LoadingScreen />;
   }
-  if (!localImage) {
-    return <LoadingScreen />;
-  }
+
   const onMapReady = () => {
     setShowUserLocation(true);
   };
-  if (isPending) {
-    return <LoadingScreen />;
-  }
 
   return (
     <View style={styles.container}>
+      <FocusAwareStatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
       <MapView
         onMapReady={onMapReady}
         provider={PROVIDER_GOOGLE}
@@ -102,6 +102,8 @@ const MapScreen = () => {
           ]}
         />
       </MapView>
+
+      <FloatButtonsMap />
 
       {isFetching && (
         <View style={styles.fetchingContainer}>

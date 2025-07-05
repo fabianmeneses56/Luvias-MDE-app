@@ -11,6 +11,7 @@
     "start:ios": "npm run ios -- --udid='20EB0407-8789-461F-B631-4FDF568296BA'"
   },
   "dependencies": {
+    "@gorhom/bottom-sheet": "^5.1.6",
     "@react-native-community/geolocation": "^3.4.0",
     "@react-native-vector-icons/material-design-icons": "^12.0.0",
     "@react-navigation/bottom-tabs": "^7.3.12",
@@ -27,6 +28,7 @@
     "react-native-mmkv-storage": "^0.11.2",
     "react-native-paper": "^5.14.0",
     "react-native-permissions": "^5.4.0",
+    "react-native-reanimated": "^3.18.0",
     "react-native-safe-area-context": "^5.4.0",
     "react-native-screens": "^4.10.0",
     "zustand": "^5.0.4"

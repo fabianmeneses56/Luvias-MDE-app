@@ -1,3 +1,6 @@
+import {ImageSourcePropType} from 'react-native';
+import {ProbabilityWeather} from '../../infrastructure/interfaces/components';
+
 export const arrayLocations = [
   {
     path: 'wrfmedCentro.json',
@@ -54,3 +57,21 @@ export const arrayLocations = [
 ];
 
 export const appColor = '#228997';
+
+export const iconMapDay: Record<ProbabilityWeather, ImageSourcePropType> = {
+  BAJA: require('../../assets/icons/daySun.png'),
+  MEDIA: require('../../assets/icons/dayRain.png'),
+  ALTA: require('../../assets/icons/dayStorm.png'),
+};
+export const iconMapNight: Record<ProbabilityWeather, ImageSourcePropType> = {
+  BAJA: require('../../assets/icons/nightMoon.png'),
+  MEDIA: require('../../assets/icons/nightRain.png'),
+  ALTA: require('../../assets/icons/nightStorm.png'),
+};
+
+export const dayMoment = {
+  afternoonRain: 'Tarde',
+  earlyMorningRain: 'Madrugada',
+  morningRain: 'Mañana',
+  nightRain: 'Noche',
+};
