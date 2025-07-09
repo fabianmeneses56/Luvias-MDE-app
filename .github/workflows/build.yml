@@ -46,6 +46,10 @@ jobs:
         run: |
           echo "GOOGLE_MAPS_API_KEY_ANDROID=${{ secrets.GOOGLE_MAPS_API_KEY_ANDROID }}" >> .env
 
+      - name: Rebuild keystore file
+        run: |
+          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > android/app/my-upload-key.keystore
+
       - name: Build Android Application
         run: |
           cd android
