@@ -1,14 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
 import {Image, StyleSheet, View} from 'react-native';
-import React, {useState, useRef, useMemo} from 'react';
+import React, {useState, useRef} from 'react';
 import {Button, Text} from 'react-native-paper';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import BottomSheet, {BottomSheetFlatList} from '@gorhom/bottom-sheet';
+import BottomSheet from '@gorhom/bottom-sheet';
 
-import {appColor, arrayLocations} from '../../../config/utils/constanst';
+import {appColor} from '../../../config/utils/constanst';
 import {storage} from '../../../config/storage/mmkvStorage';
 import {RootStackParams} from '../../../infrastructure/interfaces/navigation';
+import CustomBottomSheet from '../../components/CustomBottomSheet';
 
 const OnboardingScreen = () => {
   const [value, setValue] = useState<null | string>(null);
@@ -16,8 +17,6 @@ const OnboardingScreen = () => {
   const navigation = useNavigation<NavigationProp<RootStackParams>>();
 
   const bottomSheetRef = useRef<BottomSheet>(null);
-
-  const snapPoints = useMemo(() => ['50%', '90%'], []);
 
   const {top, bottom} = useSafeAreaInsets();
   return (
@@ -69,31 +68,13 @@ const OnboardingScreen = () => {
           Guardar y continuar
         </Button>
       )}
-      <BottomSheet
-        ref={bottomSheetRef}
-        snapPoints={snapPoints}
-        enableDynamicSizing={false}
-        enablePanDownToClose={true}
-        animateOnMount={false}
-        index={-1}>
-        <BottomSheetFlatList
-          data={arrayLocations}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({item}) => (
-            <Button
-              style={styles.option}
-              onPress={() => {
-                setValue(item.name);
-                bottomSheetRef.current?.close();
-              }}
-              labelStyle={{fontWeight: '600'}}
-              textColor="#228997">
-              {item.name}
-            </Button>
-          )}
-          contentContainerStyle={styles.contentContainer}
-        />
-      </BottomSheet>
+
+      <CustomBottomSheet
+        bottomSheetRef={bottomSheetRef}
+        onPressButton={location => {
+          setValue(location);
+        }}
+      />
     </View>
   );
 };

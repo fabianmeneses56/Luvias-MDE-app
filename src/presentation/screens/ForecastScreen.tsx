@@ -1,20 +1,23 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
 import {View, StyleSheet} from 'react-native';
+import React, {useState, useEffect, useRef} from 'react';
+import {Text, Button} from 'react-native-paper';
 import {useQuery} from '@tanstack/react-query';
-import {Text, IconButton} from 'react-native-paper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import BottomSheet from '@gorhom/bottom-sheet';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 import ForecastView from '../components/ForecastView';
 import {getForecastByLocation} from '../../actions/api/getForecast';
-import {appColor, arrayLocations} from '../../config/utils/constanst';
+import {arrayLocations} from '../../config/utils/constanst';
 import LoadingScreen from './loading/LoadingScreen';
 import {storage} from '../../config/storage/mmkvStorage';
 import {FocusAwareStatusBar} from '../components/FocusAwareStatusBar';
+import CustomBottomSheet from '../components/CustomBottomSheet';
 
 export const ForecastScreen = () => {
   const {top} = useSafeAreaInsets();
-
+  const bottomSheetRef = useRef<BottomSheet>(null);
   const onBoardingViewed = storage.getString('location');
 
   const [currentLocation, setCurrentLocation] = useState(0);
@@ -33,69 +36,62 @@ export const ForecastScreen = () => {
   }, [onBoardingViewed]);
 
   return (
-    <View style={[styles.container, {paddingTop: top + 20}]}>
-      <FocusAwareStatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}>
-        <IconButton
-          style={{borderColor: appColor}}
-          iconColor={appColor}
-          mode="outlined"
-          onPress={() =>
-            setCurrentLocation(prev => {
-              if (prev > 0) {
-                return prev - 1;
-              }
-              return arrayLocations.length - 1;
-            })
-          }
-          icon="chevron-left-circle"
+    <GestureHandlerRootView>
+      <View style={[styles.container, {paddingTop: top + 20}]}>
+        <FocusAwareStatusBar
+          barStyle="dark-content"
+          backgroundColor="#ecf0f1"
         />
         <View
           style={{
-            alignSelf: 'center',
-            flex: 1,
-            padding: 5,
+            flexDirection: 'row',
           }}>
-          <Text
+          <View
             style={{
-              textAlign: 'center',
-              fontWeight: '600',
-            }}
-            variant="headlineSmall">
-            {arrayLocations[currentLocation].name}
-          </Text>
-          <Text
-            style={{
-              textAlign: 'center',
-            }}
-            variant="labelLarge">
-            {lastUpdate}
-          </Text>
-        </View>
-        <IconButton
-          style={{borderColor: appColor}}
-          icon={'chevron-right-circle'}
-          mode="outlined"
-          iconColor={appColor}
-          onPress={() =>
-            setCurrentLocation(prev => {
-              if (prev !== arrayLocations.length - 1) {
-                return prev + 1;
-              }
+              flex: 1,
+              alignItems: 'center',
+            }}>
+            <Button
+              mode="contained"
+              onPress={() => bottomSheetRef.current?.collapse()}
+              icon={'menu-down'}
+              contentStyle={{flexDirection: 'row-reverse'}}
+              buttonColor="#FFFFFF"
+              textColor="#228997">
+              <Text
+                style={{
+                  textAlign: 'center',
+                  fontWeight: '600',
+                }}
+                variant="headlineSmall">
+                {arrayLocations[currentLocation].name}
+              </Text>
+            </Button>
 
-              return 0;
-            })
-          }
+            <Text
+              style={{
+                textAlign: 'center',
+              }}
+              variant="labelLarge">
+              {lastUpdate}
+            </Text>
+          </View>
+        </View>
+
+        {isLoading && <LoadingScreen />}
+        {data && <ForecastView data={data} />}
+
+        <CustomBottomSheet
+          bottomSheetRef={bottomSheetRef}
+          onPressButton={location => {
+            const indexFavoriteLocation = arrayLocations.findIndex(
+              value => value.name === location,
+            );
+            setCurrentLocation(indexFavoriteLocation ?? 0);
+          }}
         />
       </View>
-
-      {isLoading && <LoadingScreen />}
-      {data && <ForecastView data={data} />}
-    </View>
+    </GestureHandlerRootView>
   );
 };
 
@@ -105,5 +101,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 10,
     backgroundColor: 'white',
+  },
+  option: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+    fontWeight: '800',
+  },
+  contentContainer: {
+    flex: 1,
+    padding: 15,
+    alignItems: 'center',
   },
 });
